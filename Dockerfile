@@ -2,6 +2,7 @@ FROM  public.ecr.aws/docker/library/python:3.11.10-slim-bookworm
 
 ENV STREAMLIT_SERVER_PORT=8501
 ENV STREAMLIT_SERVER_ADDRESS=0.0.0.0
+ENV OLLAMA_HOST=host.docker.internal
 
 WORKDIR /app
 
