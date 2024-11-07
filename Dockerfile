@@ -1,5 +1,8 @@
 FROM  public.ecr.aws/docker/library/python:3.11.10-slim-bookworm
 
+ENV STREAMLIT_SERVER_PORT=8501
+ENV STREAMLIT_SERVER_ADDRESS=0.0.0.0
+
 WORKDIR /app
 
 COPY requirements/ requirements
@@ -16,6 +19,6 @@ eot
 
 COPY app.py .
 
-EXPOSE 8501
+EXPOSE $STREAMLIT_SERVER_PORT
 
-CMD ["streamlit",  "run" , "app.py", "--server.port",  "8501", "--server.address",  "0.0.0.0"]
+CMD ["streamlit",  "run" , "app.py"]
