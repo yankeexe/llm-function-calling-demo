@@ -68,7 +68,6 @@ if prompt:
 
     messages.append(HumanMessage(prompt))
     ai_response = llm_with_tools.invoke(messages)
-    breakpoint()
     messages.append(ai_response)
 
     if not ai_response.tool_calls:
