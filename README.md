@@ -18,8 +18,16 @@ make setup
 
 ## ⚡️ Running the application
 
+Running locally:
+
 ```sh
 make run
+```
+
+Running in a container:
+
+```sh
+make docker-run
 ```
 
 ## ✨ Linters and Formatters
