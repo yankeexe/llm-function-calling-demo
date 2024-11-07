@@ -32,9 +32,9 @@ build-image:
 		docker build -t $(IMAGE_NAME) .; \
 	fi
 
-docker-run: build-image # Run the application in a Docker container
-	@docker run -p $(LOCAL_PORT):8501 -d func-calling
-	@echo "🎉 Goto http://localhost:$(LOCAL_PORT) to get stared!"
+run-docker: build-image # Run the application in a Docker container
+	@docker run --name $(IMAGE_NAME) -p $(LOCAL_PORT):8501 -d $(IMAGE_NAME)
+	@echo "🎉 Goto http://localhost:$(LOCAL_PORT) to get started!"
 
 setup: # Initial project setup
 	@echo "Creating virtual env at: $(VENV_DIR)"s
