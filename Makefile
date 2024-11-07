@@ -3,6 +3,8 @@ SHELL :=/bin/bash
 .PHONY: clean check setup
 .DEFAULT_GOAL=help
 VENV_DIR = .venv
+IMAGE_NAME := func-calling-demo
+LOCAL_PORT := 8501
 
 check: # Ruff check
 	@ruff check .
@@ -21,8 +23,21 @@ clean: # Clean temporary files
 run: # Run the application
 	@streamlit run app.py
 
+build-image:
+	@if docker image inspect $(IMAGE_NAME) > /dev/null 2>&1; then \
+		echo "✅ Image $(IMAGE_NAME) exists"; \
+	else \
+		echo "❌ Image $(IMAGE_NAME) does not exist"; \
+		echo "🔨 Bulding image..."; \
+		docker build -t $(IMAGE_NAME) .; \
+	fi
+
+docker-run: build-image # Run the application in a Docker container
+	@docker run -p $(LOCAL_PORT):8501 -d func-calling
+	@echo "🎉 Goto http://localhost:$(LOCAL_PORT) to get stared!"
+
 setup: # Initial project setup
-	@echo "Creating virtual env at: $(VENV_DIR)"
+	@echo "Creating virtual env at: $(VENV_DIR)"s
 	@python3 -m venv $(VENV_DIR)
 	@echo "Installing dependencies..."
 	@source $(VENV_DIR)/bin/activate && pip install -r requirements/requirements-dev.txt && pip install -r requirements/requirements.txt
