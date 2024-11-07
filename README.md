@@ -27,7 +27,7 @@ make run
 Running in a container:
 
 ```sh
-make docker-run
+make run-docker
 ```
 
 ## ✨ Linters and Formatters
